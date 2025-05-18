@@ -53,7 +53,7 @@ public class FlipkartHomePage {
     }
     
     public boolean isSearchResultDisplayed(String expectedKeyword) {
-        List<WebElement> productTitles = driver.findElements(By.cssSelector("div._4rR01T")); // Adjust selector if needed
+        List<WebElement> productTitles = driver.findElements(By.cssSelector("div.WOvzF4")); // Adjust selector if needed
 
         for (WebElement title : productTitles) {
             if (title.getText().toLowerCase().contains(expectedKeyword.toLowerCase())) {

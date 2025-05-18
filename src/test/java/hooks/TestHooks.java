@@ -21,22 +21,46 @@ public class TestHooks {
         logger.info("▶ Starting Scenario: " + scenario.getName());
     }
 
+//    @AfterStep
+//    public void afterStep(Scenario scenario) {
+//        String stepInfo = scenario.getName(); // or fetch from context if needed
+//        if (scenario.isFailed()) {
+//            String screenshotPath = ScreenshotUtil.takeScreenshot(stepInfo);
+//            ExtentCucumberAdapter.addTestStepLog("❌ Step failed: " + stepInfo);
+//            try {
+//				ExtentCucumberAdapter.addTestStepScreenCaptureFromPath(screenshotPath);
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//            logger.error("Step failed: " + stepInfo);
+//        } else {
+//            ExtentCucumberAdapter.addTestStepLog("✅ Step passed: " + stepInfo);
+//            logger.info("Step passed: " + stepInfo);
+//        }
+//    }
+    
+    
     @AfterStep
     public void afterStep(Scenario scenario) {
-        String stepInfo = scenario.getName(); // or fetch from context if needed
-        if (scenario.isFailed()) {
-            String screenshotPath = ScreenshotUtil.takeScreenshot(stepInfo);
-            ExtentCucumberAdapter.addTestStepLog("❌ Step failed: " + stepInfo);
-            try {
-				ExtentCucumberAdapter.addTestStepScreenCaptureFromPath(screenshotPath);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-            logger.error("Step failed: " + stepInfo);
-        } else {
-            ExtentCucumberAdapter.addTestStepLog("✅ Step passed: " + stepInfo);
-            logger.info("Step passed: " + stepInfo);
+        String stepInfo = scenario.getName();
+
+        try {
+            if (scenario.isFailed()) {
+                String screenshotPath = ScreenshotUtil.takeScreenshot(stepInfo);
+                if (ExtentCucumberAdapter.getCurrentStep() != null) {
+                    ExtentCucumberAdapter.addTestStepLog("❌ Step failed: " + stepInfo);
+                    ExtentCucumberAdapter.addTestStepScreenCaptureFromPath(screenshotPath);
+                }
+                logger.error("Step failed: " + stepInfo);
+            } else {
+                if (ExtentCucumberAdapter.getCurrentStep() != null) {
+                    ExtentCucumberAdapter.addTestStepLog("✅ Step passed: " + stepInfo);
+                }
+                logger.info("Step passed: " + stepInfo);
+            }
+        } catch (Exception e) {
+            logger.error("Error in afterStep logging: " + e.getMessage(), e);
         }
     }
 

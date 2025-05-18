@@ -18,10 +18,11 @@ public class FlipkartLoginSteps extends BaseTest {
     WebDriver driver = DriverFactory.getDriver();
 
     @Given("user is on Flipkart homepage")
-    public void user_is_on_flipkart_homepage() {
+    public void user_is_on_flipkart_homepage() throws Exception {
         ScenarioContext.setCurrentStep("Given user is on Flipkart homepage");
         driver.get(ConfigReader.getProperty("url"));
-        AssertionUtil.assertTrue(driver.getTitle().contains("Online Shopping Site for Mobiles, Electronics, Furniture, Grocery, Lifestyle, Books & More. Best Offers!"), "Title doesn't match", driver);
+        Thread.sleep(3000);
+	        AssertionUtil.assertTrue(driver.getTitle().contains("Online Shopping Site for Mobiles, Electronics, Furniture, Grocery, Lifestyle, Books & More. Best Offers!"), "Title doesn't match", driver);
     }
 
     @When("user closes the login popup")
@@ -47,18 +48,20 @@ public class FlipkartLoginSteps extends BaseTest {
 
     @When("user searches for {string}")
     public void user_searches_for(String product) {
+    	homePage = new FlipkartHomePage(driver);
         homePage.searchProduct(product);
-        AssertionUtil.assertTrue(
-        	    homePage.isSearchResultDisplayed("iPhone"),
-        	    "Product not found in search results!",
-        	    DriverFactory.getDriver()
-        	);
 
     }
 
     @Then("product search results should be displayed")
     public void product_search_results_should_be_displayed() {
         // Add assertion later if needed
+    	homePage = new FlipkartHomePage(driver);
+        AssertionUtil.assertTrue(
+        	    homePage.isSearchResultDisplayed("iPhone"),
+        	    "Product not found in search results!",
+        	    DriverFactory.getDriver()
+        	);
         System.out.println("Product search simulated");
     }
 }
