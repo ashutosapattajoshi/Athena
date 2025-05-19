@@ -18,10 +18,6 @@ public class DriverFactory {
     public static WebDriver initDriver() {
         String browser = prop.getProperty("browser");
         boolean isHeadless = Boolean.parseBoolean(prop.getProperty("headless"));
-        
-
-        System.out.println("Browser: " + browser);
-        System.out.println("Headless mode: " + isHeadless);
 
         if (browser.equalsIgnoreCase("chrome")) {
             WebDriverManager.chromedriver().setup();
