@@ -3,13 +3,13 @@
 
     <!-- ✅ Register Retry Listener -->
     <listeners>
-        <listener class-name="listeners.RetryListener" />
+        <listener class-name="utils.RetryListener" />
     </listeners>
 
     <test name="Flipkart Test Run">
         <classes>
             <!-- ✅ Point to your Cucumber Test Runner -->
-            <class name="runner.TestRunner" />
+            <class name="runners.TestRunner" />
         </classes>
     </test>
 

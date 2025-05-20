@@ -1,4 +1,0 @@
-extent.reporter.spark.start=true
-extent.reporter.spark.out=reports/extent-report.html
-extent.reporter.spark.config=extent-config.xml
-extent.cucumber.adapter=true

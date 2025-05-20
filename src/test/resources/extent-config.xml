@@ -1,0 +1,10 @@
+<extentreports>
+  <configuration>
+    <theme>standard</theme>
+    <encoding>utf-8</encoding>
+    <protocol>https</protocol>
+    <documentTitle>Automation Report</documentTitle>
+    <reportName>Regression Test Execution</reportName>
+    <timeStampFormat>MMM dd, yyyy HH:mm:ss</timeStampFormat>
+  </configuration>
+</extentreports>

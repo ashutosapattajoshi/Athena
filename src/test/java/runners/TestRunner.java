@@ -4,10 +4,16 @@ import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(
-    features = "src/test/resources/features",
-    glue = {"stepdefs", "hooks"},
-    plugin = {"pretty", "html:target/cucumber-reports"},
-    monochrome = true
-)
-public class TestRunner extends AbstractTestNGCucumberTests {
-}
+	    features = "src/test/resources/features",
+	    glue = {"stepdefs", "hooks"},
+	    plugin = {
+	        "pretty",
+	        "html:target/cucumber-html-report.html",
+	        "json:target/cucumber-report.json",
+	        "testng:target/testng-cucumber.xml",
+	        "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
+	    },
+	    monochrome = true
+	)
+	public class TestRunner extends AbstractTestNGCucumberTests {
+	}

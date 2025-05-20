@@ -20,4 +20,3 @@ public class ScreenshotUtil {
         return destPath;
     }
 }
-
