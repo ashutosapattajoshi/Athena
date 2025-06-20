@@ -1,9 +1,8 @@
 pipeline {
     agent any
 
-    tools {
-        maven 'Maven 3.8.6'  // Match the name configured in Jenkins
-        jdk 'Java 17'        // Optional: if you want to specify JDK explicitly
+    triggers {
+        githubPush()
     }
 
     stages {
@@ -19,14 +18,16 @@ pipeline {
             }
         }
 
-        stage('Publish Reports') {
+        stage('Publish ExtentReports') {
             steps {
-                publishHTML([allowMissing: true,
+                publishHTML([
+                    allowMissing: true,
                     alwaysLinkToLastBuild: true,
                     keepAll: true,
                     reportDir: 'test-output/ExtentReports',
                     reportFiles: 'index.html',
-                    reportName: 'Automation Report'])
+                    reportName: 'Extent HTML Report'
+                ])
             }
         }
     }

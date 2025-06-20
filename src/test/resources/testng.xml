@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<suite name="AP Automation Suite" parallel="false" thread-count="1">
+<suite name="AP Automation Suite" parallel="tests" thread-count="3">
 
     <!-- ✅ Register Retry Listener -->
-    <listeners>
+  <  <listeners>
         <listener class-name="utils.RetryListener" />
     </listeners>
 

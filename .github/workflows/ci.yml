@@ -18,7 +18,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
-          java-version: '17'  # Or 11 if your framework uses that
+          java-version: '17'
 
       - name: Cache Maven dependencies
         uses: actions/cache@v3
@@ -30,3 +30,17 @@ jobs:
 
       - name: Build and Run Tests
         run: mvn clean test
+
+      - name: Upload ExtentReports
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: ExtentReport
+          path: test-output/ExtentReport.html
+
+      - name: Upload Surefire Reports
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: SurefireReports
+          path: target/surefire-reports/

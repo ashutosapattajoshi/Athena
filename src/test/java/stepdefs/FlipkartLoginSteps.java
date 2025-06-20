@@ -18,7 +18,7 @@ public class FlipkartLoginSteps {
 
     @Given("user is on Flipkart homepage")
     public void user_is_on_flipkart_homepage() throws Exception {
-        ScenarioContext.setCurrentStep("Given user is on Flipkart homepage");
+        //ScenarioContext.setCurrentStep("Given user is on Flipkart homepage");
         driver.get(ConfigReader.getProperty("url"));
         Thread.sleep(3000);
 	        AssertionUtil.assertTrue(driver.getTitle().contains("Online Shopping Site for Mobiles, Electronics, Furniture, Grocery, Lifestyle, Books & More. Best Offers!"), "Title doesn't match");
@@ -26,7 +26,7 @@ public class FlipkartLoginSteps {
 
     @When("user closes the login popup")
     public void user_closes_the_login_popup() {
-        ScenarioContext.setCurrentStep("When user closes the login popup");
+        //ScenarioContext.setCurrentStep("When user closes the login popup");
         homePage = new FlipkartHomePage(driver);
         homePage.closeLoginPopupIfPresent();
 
@@ -34,7 +34,7 @@ public class FlipkartLoginSteps {
 
     @When("user clicks on Login and enters {string}")
     public void user_clicks_on_login_and_enters(String phoneNumber) {
-    	ScenarioContext.setCurrentStep("When user clicks on Login and enters phoneNumber");
+    	//ScenarioContext.setCurrentStep("When user clicks on Login and enters phoneNumber");
         homePage.clickLoginLink();
         loginPage = new FlipkartLoginPage(driver);
         loginPage.enterUsername(phoneNumber);
@@ -49,14 +49,19 @@ public class FlipkartLoginSteps {
     public void user_searches_for(String product) {
     	homePage = new FlipkartHomePage(driver);
         homePage.searchProduct(product);
-
     }
+    
+//    @When("user searches for <product>")
+//    public void user_searches_for_product(String product) {
+//    	homePage = new FlipkartHomePage(driver);
+//        homePage.searchProduct(product);
+//    }
 
     @Then("product search results should be displayed")
     public void product_search_results_should_be_displayed() {
         // Add assertion later if needed
     	homePage = new FlipkartHomePage(driver);
-        AssertionUtil.assertFalse(
+        AssertionUtil.assertTrue(
         	    homePage.isSearchResultDisplayed("iPhone"),
         	    "Product not found in search results!"
         	);
