@@ -50,19 +50,13 @@ public class FlipkartLoginSteps {
     	homePage = new FlipkartHomePage(driver);
         homePage.searchProduct(product);
     }
-    
-//    @When("user searches for <product>")
-//    public void user_searches_for_product(String product) {
-//    	homePage = new FlipkartHomePage(driver);
-//        homePage.searchProduct(product);
-//    }
 
-    @Then("product search results should be displayed")
-    public void product_search_results_should_be_displayed() {
+    @Then("product search results should be displayed with {string}")
+    public void product_search_results_should_be_displayed(String product) {
         // Add assertion later if needed
     	homePage = new FlipkartHomePage(driver);
         AssertionUtil.assertTrue(
-        	    homePage.isSearchResultDisplayed("iPhone"),
+        	    homePage.isSearchResultDisplayed(product),
         	    "Product not found in search results!"
         	);
         System.out.println("Product search simulated");

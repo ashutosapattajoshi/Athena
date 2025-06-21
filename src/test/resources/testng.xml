@@ -2,7 +2,7 @@
 <suite name="AP Automation Suite" parallel="tests" thread-count="3">
 
     <!-- ✅ Register Retry Listener -->
-  <  <listeners>
+    <listeners>
         <listener class-name="utils.RetryListener" />
     </listeners>
 

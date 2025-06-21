@@ -8,7 +8,7 @@ import io.cucumber.testng.CucumberOptions;
 
 //@Listeners({utils.RetryListener.class}) (This is not working)
 @CucumberOptions(
-	    features = {"src/test/resources/features/flipkart_login.feature:15"},
+	    features = {"src/test/resources/features/flipkart_login.feature"},
 	    glue = {"stepdefs", "hooks"},
 	    plugin = {
 	        "pretty",

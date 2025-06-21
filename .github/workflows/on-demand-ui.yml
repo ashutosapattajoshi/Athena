@@ -1,0 +1,38 @@
+name: Athena On-Demand UI Tests
+
+on:
+  workflow_dispatch:
+    inputs:
+      tags:
+        description: "Cucumber tags to run (e.g. @smoke)"
+        required: false
+        default: ""
+
+jobs:
+  run-on-demand:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Run Tagged UI Tests
+        run: |
+          if [ -z "${{ github.event.inputs.tags }}" ]; then
+            mvn clean test
+          else
+            mvn clean test -Dcucumber.filter.tags="${{ github.event.inputs.tags }}"
+          fi
+
+      - name: Upload ExtentReport
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ExtentReport
+          path: reports/ExtentReport.html

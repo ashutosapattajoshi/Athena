@@ -18,6 +18,9 @@ public class FlipkartLoginPage {
     }
 
     // Elements
+    
+    @FindBy(linkText = "Login")
+    private WebElement loginButtonTab;
 
     @FindBy(xpath = "//input[@class='_2IX_2- VJZDxU']") // Mobile/email input
     private WebElement usernameField;
@@ -32,6 +35,10 @@ public class FlipkartLoginPage {
     private WebElement errorMsg;
 
     // Actions
+    
+    public void  clickOnLoginTab() {
+    	elementUtil.waitForElementToBeVisible(loginButtonTab, 10);
+    }
 
     public void enterUsername(String username) {
         elementUtil.waitForElementToBeVisible(usernameField, 10).sendKeys(username);

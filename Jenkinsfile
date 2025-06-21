@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    
+    tools {
+        maven 'Maven 3' // This name must match the Maven installation name from Jenkins → Global Tool Configuration
+    }
 
     triggers {
         githubPush()
