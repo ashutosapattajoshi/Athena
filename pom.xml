@@ -152,19 +152,19 @@
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.2.5</version>
-			<!--	<configuration>
+				<!--				<configuration>
 					<includes>
 						<include>**/runners/*.java</include>
 					</includes>
 				</configuration> -->
-				
+
 				<configuration>
-        <suiteXmlFiles>
-          <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
-        </suiteXmlFiles>
-      </configuration>
-			</plugin> 
-			 
+					<suiteXmlFiles>
+						<suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
+					</suiteXmlFiles>
+				</configuration>
+			</plugin>
+
 		</plugins>
 	</build>
 </project>
