@@ -8,7 +8,6 @@ import io.cucumber.java.en.*;
 import pages.FlipkartHomePage;
 import pages.FlipkartLoginPage;
 import utils.AssertionUtil;
-import utils.ScenarioContext;
 
 public class FlipkartLoginSteps {
 
