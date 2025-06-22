@@ -36,7 +36,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ExtentReport
-          path: test-output/ExtentReport.html
+          path: test-output/ExtentReports/
 
       - name: Upload Surefire Reports
         if: failure()
