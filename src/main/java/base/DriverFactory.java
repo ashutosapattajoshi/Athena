@@ -18,7 +18,10 @@ public class DriverFactory {
     public static WebDriver initDriver() {
         String runMode = prop.getProperty("runMode", "local");
         String browser = prop.getProperty("browser", "chrome");
-        boolean isHeadless = Boolean.parseBoolean(prop.getProperty("headless", "false"));
+        boolean isHeadless = Boolean.parseBoolean(
+        	    System.getProperty("headless", prop.getProperty("headless", "false"))
+        	);
+
 
         try {
             if (runMode.equalsIgnoreCase("local")) {
