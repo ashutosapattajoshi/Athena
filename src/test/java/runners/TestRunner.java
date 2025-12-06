@@ -1,12 +1,8 @@
 package runners;
-
 import org.testng.annotations.DataProvider;
-import org.testng.annotations.Listeners;
-
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 
-//@Listeners({utils.RetryListener.class}) //(This is not working)
 @CucumberOptions(
 	    features = {"src/test/resources/features/flipkart_login.feature", "src/test/resources/features/flipkart_search.feature"},
 	    glue = {"stepdefs", "hooks"},
@@ -15,8 +11,7 @@ import io.cucumber.testng.CucumberOptions;
 	        "html:target/cucumber-html-report.html",
 	        "json:target/cucumber-report.json",
 	        "testng:target/testng-cucumber.xml",
-	        "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
-	        "hooks.StepEventListener"
+	        "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
 	    },
 	    monochrome = true,
 	    dryRun = false,

@@ -1,170 +1,140 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.ap.automation.framework</groupId>
-	<artifactId>ap-automation-framework</artifactId>
-	<version>1.0-SNAPSHOT</version>
-	<description>This is a framework for UI automation using selenium tool</description>
+    <groupId>com.athena</groupId>
+    <artifactId>athena-framework</artifactId>
+    <version>1.0.0</version>
 
-	<properties>
-		<maven.compiler.source>11</maven.compiler.source>
-		<maven.compiler.target>11</maven.compiler.target>
-	</properties>
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
 
-	<dependencies>
-		<!-- Selenium -->
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-java</artifactId>
-			<version>4.20.0</version>
-		</dependency>
+        <!-- Versions -->
+        <selenium.version>4.21.0</selenium.version>
+        <cucumber.version>7.18.1</cucumber.version>
+        <testng.version>7.10.2</testng.version>
+        <extentreports.version>5.0.9</extentreports.version>
+        <extentreportscucumber.version>1.14.0</extentreportscucumber.version>
+        <webdrivermanager.version>5.8.0</webdrivermanager.version>
+        <jackson.version>2.17.1</jackson.version>
+    </properties>
 
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-remote-driver</artifactId>
-			<version>4.20.0</version>
-		</dependency>
+    <dependencies>
 
+        <!-- Selenium -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>${selenium.version}</version>
+        </dependency>
 
-		<!-- WebDriverManager -->
-		<dependency>
-			<groupId>io.github.bonigarcia</groupId>
-			<artifactId>webdrivermanager</artifactId>
-			<version>5.7.0</version>
-		</dependency>
+        <!-- WebDriverManager -->
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>${webdrivermanager.version}</version>
+        </dependency>
 
-		<!-- TestNG -->
-		<dependency>
-			<groupId>org.testng</groupId>
-			<artifactId>testng</artifactId>
-			<version>7.9.0</version> <!-- Use latest stable -->
-		</dependency>
+        <!-- TestNG -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
+        </dependency>
 
-		<!-- Cucumber BDD -->
-		<dependency>
-			<groupId>io.cucumber</groupId>
-			<artifactId>cucumber-java</artifactId>
-			<version>7.14.0</version>
-		</dependency>
-		<dependency>
-			<groupId>io.cucumber</groupId>
-			<artifactId>cucumber-testng</artifactId>
-			<version>7.14.0</version>
-		</dependency>
+        <!-- Cucumber Dependencies -->
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${cucumber.version}</version>
+        </dependency>
 
-		<!-- Cucumber JVM Dependency for Glue -->
-		<dependency>
-			<groupId>io.cucumber</groupId>
-			<artifactId>cucumber-picocontainer</artifactId>
-			<version>7.15.0</version>
-		</dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-testng</artifactId>
+            <version>${cucumber.version}</version>
+        </dependency>
 
-		<!-- ExtentReports Core -->
-		<dependency>
-			<groupId>com.aventstack</groupId>
-			<artifactId>extentreports</artifactId>
-			<version>5.0.9</version>
-		</dependency>
-
-		<!-- ExtentReports Adapter -->
-		<dependency>
-			<groupId>tech.grasshopper</groupId>
-			<artifactId>extentreports-cucumber7-adapter</artifactId>
-			<version>1.14.0</version>
-		</dependency>
-
-		<!-- REQUIRED: Protocol Buffers -->
-		<dependency>
-			<groupId>com.google.protobuf</groupId>
-			<artifactId>protobuf-java</artifactId>
-			<version>3.21.12</version>
-		</dependency>
-
-		<!-- Gson: Required internally by Extent -->
-		<dependency>
-			<groupId>com.google.code.gson</groupId>
-			<artifactId>gson</artifactId>
-			<version>2.10.1</version>
-		</dependency>
-
-		<!-- Log4j -->
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
-		</dependency>
-
-		<!-- Log4j2 Core -->
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-core</artifactId>
-			<version>2.20.0</version>
-		</dependency>
-
-		<!-- Log4j2 API -->
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-api</artifactId>
-			<version>2.20.0</version>
-		</dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-core</artifactId>
+            <version>${cucumber.version}</version>
+        </dependency>
 
 
-		<!-- Excel (Apache POI) -->
-		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi</artifactId>
-			<version>5.2.5</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi-ooxml</artifactId>
-			<version>5.2.5</version>
-		</dependency>
+        <!-- Extent Reports -->
+        <dependency>
+            <groupId>com.aventstack</groupId>
+            <artifactId>extentreports</artifactId>
+            <version>${extentreports.version}</version>
+        </dependency>
+        
+        <!-- ExtentReports Cucumber Adapter -->
+<dependency>
+    <groupId>tech.grasshopper</groupId>
+    <artifactId>extentreports-cucumber7-adapter</artifactId>
+    <version>${extentreportscucumber.version}</version>
+</dependency>
 
-		<!-- JSON & CSV -->
-		<dependency>
-			<groupId>com.googlecode.json-simple</groupId>
-			<artifactId>json-simple</artifactId>
-			<version>1.1.1</version>
-		</dependency>
-		<dependency>
-			<groupId>com.opencsv</groupId>
-			<artifactId>opencsv</artifactId>
-			<version>5.9</version>
-		</dependency>
-	</dependencies>
+        <!-- Apache Commons IO -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.17.0</version>
+        </dependency>
 
-	<build>
-		<plugins>
-			<!-- Compiler plugin -->
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.11.0</version>
-				<configuration>
-					<source>11</source>
-					<target>11</target>
-				</configuration>
-			</plugin>
+        <!-- JSON Data Handling -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
 
-			<!-- Surefire plugin for TestNG/Cucumber -->
-			<plugin>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>3.2.5</version>
-				<!--				<configuration>
-					<includes>
-						<include>**/runners/*.java</include>
-					</includes>
-				</configuration> -->
+        <!-- Apache POI (Excel Reader) -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>5.2.5</version>
+        </dependency>
 
-				<configuration>
-					<suiteXmlFiles>
-						<suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
-					</suiteXmlFiles>
-				</configuration>
-			</plugin>
+        <!-- Logging -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>2.0.13</version>
+        </dependency>
 
-		</plugins>
-	</build>
+    </dependencies>
+
+    <build>
+        <plugins>
+
+            <!-- Compiler Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.12.1</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>
+            </plugin>
+
+            <!-- Surefire plugin (TestNG Runner) -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
+                <configuration>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
+                    </suiteXmlFiles>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
 </project>
