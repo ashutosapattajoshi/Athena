@@ -8,15 +8,15 @@ Background:
     When user searches for "iPhone"
     Then product search results should be displayed with "iPhone"
     
-  #@smoke 
-  #Scenario: User logs in and searches for a product
-    #When user searches for "iPhone"
-   #
-  #@smoke   
-  #Scenario: User searches for a product
-    #When user searches for "Samsung Galaxy"
-    #Then product search results should be displayed with "Samsung Galaxy"
-    #
+  @regression 
+  Scenario: User logs in and searches for a product
+    When user searches for "iPhone"
+   
+  @sanity   
+  Scenario: User searches for a product
+    When user searches for "Samsung Galaxy"
+    Then product search results should be displayed with "Samsung Galaxy"
+    
   #@smoke   
   #Scenario Outline: User searches for a product
     #When user searches for "<product>"
