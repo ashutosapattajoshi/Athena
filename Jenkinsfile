@@ -1,8 +1,8 @@
 pipeline {
     agent any
-    
+
     tools {
-        maven 'Maven 3' // This name must match the Maven installation name from Jenkins → Global Tool Configuration
+        maven 'Maven 3' // Must match the Maven installation name in Jenkins → Global Tool Configuration
     }
 
     triggers {
@@ -18,7 +18,9 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                sh 'mvn clean test -Dheadless=true'
+                // Use the Maven tool configured in Jenkins
+                def mvnHome = tool name: 'Maven 3', type: 'maven'
+                sh "${mvnHome}/bin/mvn clean test -Dheadless=true"
             }
         }
 

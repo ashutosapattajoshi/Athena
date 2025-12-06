@@ -20,7 +20,7 @@ public class FlipkartLoginSteps {
         //ScenarioContext.setCurrentStep("Given user is on Flipkart homepage");
         driver.get(ConfigReader.getProperty("url"));
         Thread.sleep(3000);
-	        AssertionUtil.assertTrue(driver.getTitle().contains("Online Shopping Site for Mobiles, Electronics, Furniture, Grocery, Lifestyle, Books & More. Best Offers!"), "Title doesn't match");
+	        AssertionUtil.assertTrue(driver.getTitle().contains("Onliner Shopping Site for Mobiles, Electronics, Furniture, Grocery, Lifestyle, Books & More. Best Offers!"), "Title doesn't match");
     }
 
     @When("user closes the login popup")

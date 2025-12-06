@@ -11,12 +11,22 @@ import java.io.IOException;
 public class ScreenshotUtil {
     public static String takeScreenshot(String scenarioName) {
         File srcFile = ((TakesScreenshot) DriverFactory.getDriver()).getScreenshotAs(OutputType.FILE);
-        String destPath = "test-output/screenshots/" + scenarioName.replace(" ", "_") + ".png";
+        String fileName = scenarioName.replace(" ", "_") + ".png";
+        String fullPath = "test-output/screenshots/" + fileName;
         try {
-            FileUtils.copyFile(srcFile, new File(destPath));
+            FileUtils.copyFile(srcFile, new File(fullPath));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return destPath;
+        return "../screenshots/" + fileName;
     }
+    
+    public static String captureScreenshotAsBase64() {
+        return ((TakesScreenshot) DriverFactory.getDriver()).getScreenshotAs(OutputType.BASE64);
+    }
+    
+    public static byte[] captureScreenshotAsByte() {
+        return ((TakesScreenshot) DriverFactory.getDriver()).getScreenshotAs(OutputType.BYTES);
+    }
+
 }

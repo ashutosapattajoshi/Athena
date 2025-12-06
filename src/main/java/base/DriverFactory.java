@@ -44,9 +44,9 @@ public class DriverFactory {
         if (browser.equalsIgnoreCase("chrome")) {
             WebDriverManager.chromedriver().setup();
             ChromeOptions options = new ChromeOptions();
-            options.addArguments("--headless=new", "--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu", "--window-size=1920,1080");
-         // Fix: add a random user data dir
-            options.addArguments("--user-data-dir=/tmp/profile-" + UUID.randomUUID());
+//            options.addArguments("--headless=new", "--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu", "--window-size=1920,1080");
+//         // Fix: add a random user data dir
+//            options.addArguments("--user-data-dir=/tmp/profile-" + UUID.randomUUID());
             if (isHeadless) {
             	options.addArguments("--headless=new");
             }
