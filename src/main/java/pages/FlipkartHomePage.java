@@ -20,7 +20,7 @@ public class FlipkartHomePage {
         elementUtil = new ElementUtil(driver);
     }
 
-    // Elements
+    // HomePage Elements
 
     @FindBy(css = "button._2KpZ6l._2doB4z") // Close login popup
     private WebElement closeLoginPopupBtn;
