@@ -18,9 +18,11 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                // Use the Maven tool configured in Jenkins
-                def mvnHome = tool name: 'Maven 3', type: 'maven'
-                sh "${mvnHome}/bin/mvn clean test -Dheadless=true"
+                script {
+                    // Use the Maven tool configured in Jenkins
+                    def mvnHome = tool name: 'Maven 3', type: 'maven'
+                    sh "${mvnHome}/bin/mvn clean test -Dheadless=true"
+                }
             }
         }
 
