@@ -16,19 +16,16 @@ public class DriverFactory {
     private static Properties prop = ConfigReader.initProperties();
 
     public static WebDriver initDriver() {
-        String runMode = prop.getProperty("runMode", "local");
-        String browser = prop.getProperty("browser", "chrome");
-        boolean isHeadless = Boolean.parseBoolean(
-        	    System.getProperty("headless", prop.getProperty("headless", "false"))
-        	);
-
+        // Override with system properties (can be set via Jenkins)
+        String runMode = System.getProperty("runMode", prop.getProperty("runMode", "local"));
+        String browser = System.getProperty("browser", prop.getProperty("browser", "chrome"));
+        boolean isHeadless = Boolean.parseBoolean(System.getProperty("headless", prop.getProperty("headless", "false")));
 
         try {
             if (runMode.equalsIgnoreCase("local")) {
                 setupLocalDriver(browser, isHeadless);
             } else if (runMode.equalsIgnoreCase("remote")) {
-                String remoteType = prop.getProperty("remoteType", "grid");
-                setupRemoteDriver(browser, remoteType, isHeadless);
+                setupRemoteDriver(browser, "grid", isHeadless); // only grid now
             } else {
                 throw new RuntimeException("Invalid run mode: " + runMode);
             }
@@ -37,8 +34,10 @@ public class DriverFactory {
         }
 
         getDriver().manage().window().maximize();
-        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(Long.parseLong(prop.getProperty("implicit.wait", "10"))));
-        getDriver().manage().timeouts().pageLoadTimeout(Duration.ofSeconds(Long.parseLong(prop.getProperty("page.load.timeout", "30"))));
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(
+                Long.parseLong(prop.getProperty("implicit.wait", "10"))));
+        getDriver().manage().timeouts().pageLoadTimeout(Duration.ofSeconds(
+                Long.parseLong(prop.getProperty("page.load.timeout", "30"))));
 
         return getDriver();
     }
@@ -47,19 +46,12 @@ public class DriverFactory {
         if (browser.equalsIgnoreCase("chrome")) {
             WebDriverManager.chromedriver().setup();
             ChromeOptions options = new ChromeOptions();
-//            options.addArguments("--headless=new", "--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu", "--window-size=1920,1080");
-//         // Fix: add a random user data dir
-//            options.addArguments("--user-data-dir=/tmp/profile-" + UUID.randomUUID());
-            if (isHeadless) {
-            	options.addArguments("--headless=new");
-            }
+            if (isHeadless) options.addArguments("--headless=new");
             driver.set(new ChromeDriver(options));
         } else if (browser.equalsIgnoreCase("firefox")) {
             WebDriverManager.firefoxdriver().setup();
             FirefoxOptions options = new FirefoxOptions();
-            if (isHeadless) {
-                options.addArguments("--headless");
-            }
+            if (isHeadless) options.addArguments("--headless");
             driver.set(new FirefoxDriver(options));
         } else {
             throw new RuntimeException("Unsupported browser for local mode: " + browser);
@@ -67,6 +59,10 @@ public class DriverFactory {
     }
 
     private static void setupRemoteDriver(String browser, String remoteType, boolean isHeadless) throws Exception {
+        if (!remoteType.equalsIgnoreCase("grid")) {
+            throw new RuntimeException("Unsupported remote type: " + remoteType);
+        }
+
         DesiredCapabilities capabilities = new DesiredCapabilities();
 
         if (browser.equalsIgnoreCase("chrome")) {
@@ -83,18 +79,8 @@ public class DriverFactory {
             throw new RuntimeException("Unsupported browser for remote: " + browser);
         }
 
-        if (remoteType.equalsIgnoreCase("grid")) {
-            URL gridUrl = new URL(prop.getProperty("grid.url"));
-            driver.set(new RemoteWebDriver(gridUrl, capabilities));
-        } else if (remoteType.equalsIgnoreCase("browserstack")) {
-            capabilities.setCapability("browserstack.user", prop.getProperty("bs.user"));
-            capabilities.setCapability("browserstack.key", prop.getProperty("bs.key"));
-            capabilities.setCapability("name", "Athena Automation Test");
-            URL bsUrl = new URL("https://" + prop.getProperty("bs.user") + ":" + prop.getProperty("bs.key") + "@hub-cloud.browserstack.com/wd/hub");
-            driver.set(new RemoteWebDriver(bsUrl, capabilities));
-        } else {
-            throw new RuntimeException("Unsupported remote type: " + remoteType);
-        }
+        URL gridUrl = new URL(prop.getProperty("grid.url")); // Docker Selenium Grid URL
+        driver.set(new RemoteWebDriver(gridUrl, capabilities));
     }
 
     public static WebDriver getDriver() {
@@ -108,3 +94,4 @@ public class DriverFactory {
         }
     }
 }
+

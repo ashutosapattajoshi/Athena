@@ -14,8 +14,8 @@ import io.cucumber.testng.CucumberOptions;
 	        "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
 	    },
 	    monochrome = true,
-	    dryRun = false
-	    //tags = "@smoke"
+	    dryRun = false,
+	    tags = "@smoke"
 	)
 	public class TestRunner extends AbstractTestNGCucumberTests {
 	    @Override
